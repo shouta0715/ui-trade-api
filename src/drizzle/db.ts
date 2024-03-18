@@ -10,10 +10,10 @@ export const getDB = async (env: string) => {
 
   await client.connect();
 
-  return drizzle(client, { schema });
+  return drizzle(client, { schema, logger: true });
 };
 
-type DB = Awaited<ReturnType<typeof getDB>>;
+export type DB = Awaited<ReturnType<typeof getDB>>;
 
 export const runDrizzle = async <T>(
   { env }: Context<Env>,
