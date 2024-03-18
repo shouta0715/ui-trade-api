@@ -5,11 +5,16 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "hono": "^4.1.1"
+    "drizzle-orm": "^0.30.2",
+    "hono": "^4.1.1",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
+    "@types/pg": "^8.11.2",
     "@typescript-eslint/eslint-plugin": "latest",
+    "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.20.14",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-airbnb-typescript": "latest",

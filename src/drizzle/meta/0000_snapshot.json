@@ -1,0 +1,750 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "_prisma_migrations": {
+      "name": "_prisma_migrations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "checksum": {
+          "name": "checksum",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finished_at": {
+          "name": "finished_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "migration_name": {
+          "name": "migration_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "logs": {
+          "name": "logs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rolled_back_at": {
+          "name": "rolled_back_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "applied_steps_count": {
+          "name": "applied_steps_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emailVerified": {
+          "name": "emailVerified",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "users_email_key": {
+          "name": "users_email_key",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "providerAccountId": {
+          "name": "providerAccountId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "name": "token_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "name": "session_state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "accounts_userId_idx": {
+          "name": "accounts_userId_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        },
+        "accounts_provider_providerAccountId_key": {
+          "name": "accounts_provider_providerAccountId_key",
+          "columns": [
+            "provider",
+            "providerAccountId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "accounts_userId_fkey": {
+          "name": "accounts_userId_fkey",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "categories": {
+      "name": "categories",
+      "schema": "",
+      "columns": {
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "components": {
+      "name": "components",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "draft": {
+          "name": "draft",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "document": {
+          "name": "document",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "previewUrl": {
+          "name": "previewUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "functionName": {
+          "name": "functionName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categoryName": {
+          "name": "categoryName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "creatorId": {
+          "name": "creatorId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "components_creatorId_idx": {
+          "name": "components_creatorId_idx",
+          "columns": [
+            "creatorId"
+          ],
+          "isUnique": false
+        },
+        "components_categoryName_idx": {
+          "name": "components_categoryName_idx",
+          "columns": [
+            "categoryName"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "components_categoryName_fkey": {
+          "name": "components_categoryName_fkey",
+          "tableFrom": "components",
+          "tableTo": "categories",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "categoryName"
+          ],
+          "columnsTo": [
+            "name"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "components_creatorId_fkey": {
+          "name": "components_creatorId_fkey",
+          "tableFrom": "components",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "creatorId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "files": {
+      "name": "files",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "objectId": {
+          "name": "objectId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'index'"
+        },
+        "extension": {
+          "name": "extension",
+          "type": "Extension",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "componentId": {
+          "name": "componentId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "files_componentId_idx": {
+          "name": "files_componentId_idx",
+          "columns": [
+            "componentId"
+          ],
+          "isUnique": false
+        },
+        "files_objectId_idx": {
+          "name": "files_objectId_idx",
+          "columns": [
+            "objectId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "files_componentId_fkey": {
+          "name": "files_componentId_fkey",
+          "tableFrom": "files",
+          "tableTo": "components",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "componentId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "likes": {
+      "name": "likes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "componentId": {
+          "name": "componentId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "likes_componentId_idx": {
+          "name": "likes_componentId_idx",
+          "columns": [
+            "componentId"
+          ],
+          "isUnique": false
+        },
+        "likes_userId_idx": {
+          "name": "likes_userId_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        },
+        "likes_componentId_userId_key": {
+          "name": "likes_componentId_userId_key",
+          "columns": [
+            "componentId",
+            "userId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "likes_componentId_fkey": {
+          "name": "likes_componentId_fkey",
+          "tableFrom": "likes",
+          "tableTo": "components",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "componentId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "likes_userId_fkey": {
+          "name": "likes_userId_fkey",
+          "tableFrom": "likes",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "profiles": {
+      "name": "profiles",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "website": {
+          "name": "website",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "github": {
+          "name": "github",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "twitter": {
+          "name": "twitter",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profiles_userId_fkey": {
+          "name": "profiles_userId_fkey",
+          "tableFrom": "profiles",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "follows": {
+      "name": "follows",
+      "schema": "",
+      "columns": {
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "followerId": {
+          "name": "followerId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "followingId": {
+          "name": "followingId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "follows_followerId_idx": {
+          "name": "follows_followerId_idx",
+          "columns": [
+            "followerId"
+          ],
+          "isUnique": false
+        },
+        "follows_followingId_idx": {
+          "name": "follows_followingId_idx",
+          "columns": [
+            "followingId"
+          ],
+          "isUnique": false
+        },
+        "follows_followerId_followingId_key": {
+          "name": "follows_followerId_followingId_key",
+          "columns": [
+            "followerId",
+            "followingId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "follows_followerId_fkey": {
+          "name": "follows_followerId_fkey",
+          "tableFrom": "follows",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "followerId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "follows_followingId_fkey": {
+          "name": "follows_followingId_fkey",
+          "tableFrom": "follows",
+          "tableTo": "users",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "followingId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "follows_pkey": {
+          "name": "follows_pkey",
+          "columns": [
+            "followerId",
+            "followingId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "key_status": {
+      "name": "key_status",
+      "values": {
+        "expired": "expired",
+        "invalid": "invalid",
+        "valid": "valid",
+        "default": "default"
+      }
+    },
+    "key_type": {
+      "name": "key_type",
+      "values": {
+        "stream_xchacha20": "stream_xchacha20",
+        "secretstream": "secretstream",
+        "secretbox": "secretbox",
+        "kdf": "kdf",
+        "generichash": "generichash",
+        "shorthash": "shorthash",
+        "auth": "auth",
+        "hmacsha256": "hmacsha256",
+        "hmacsha512": "hmacsha512",
+        "aead-det": "aead-det",
+        "aead-ietf": "aead-ietf"
+      }
+    },
+    "request_status": {
+      "name": "request_status",
+      "values": {
+        "ERROR": "ERROR",
+        "SUCCESS": "SUCCESS",
+        "PENDING": "PENDING"
+      }
+    },
+    "factor_type": {
+      "name": "factor_type",
+      "values": {
+        "webauthn": "webauthn",
+        "totp": "totp"
+      }
+    },
+    "factor_status": {
+      "name": "factor_status",
+      "values": {
+        "verified": "verified",
+        "unverified": "unverified"
+      }
+    },
+    "aal_level": {
+      "name": "aal_level",
+      "values": {
+        "aal3": "aal3",
+        "aal2": "aal2",
+        "aal1": "aal1"
+      }
+    },
+    "code_challenge_method": {
+      "name": "code_challenge_method",
+      "values": {
+        "plain": "plain",
+        "s256": "s256"
+      }
+    },
+    "Extension": {
+      "name": "Extension",
+      "values": {
+        "tsx": "tsx",
+        "ts": "ts",
+        "jsx": "jsx",
+        "js": "js",
+        "css": "css",
+        "html": "html"
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
