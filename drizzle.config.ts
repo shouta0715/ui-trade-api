@@ -1,19 +1,17 @@
-import "dotenv/config"; // make sure to install dotenv package
+import dotenv from "dotenv";
 import type { Config } from "drizzle-kit";
 
-const dbCredentials = {
-  host: "127.0.0.1",
-  port: 54322,
-  user: "postgres",
-  password: "postgres",
-  database: "postgres",
-};
+dotenv.config({
+  path: "./.dev.vars",
+});
 
 export default {
   driver: "pg",
   out: "./src/drizzle",
   schema: "./src/drizzle/schema.ts",
-  dbCredentials,
+  dbCredentials: {
+    connectionString: process.env.DB_URL as string,
+  },
   verbose: true,
   strict: true,
 } satisfies Config;
