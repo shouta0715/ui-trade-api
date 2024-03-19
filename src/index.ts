@@ -1,9 +1,9 @@
 import { Hono } from "hono";
+import { Env } from "./types/env";
+import { componentsRouter } from "@/routers/components";
 
-const app = new Hono();
+const app = new Hono<Env>();
 
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
-});
+app.route("/components", componentsRouter);
 
 export default app;
