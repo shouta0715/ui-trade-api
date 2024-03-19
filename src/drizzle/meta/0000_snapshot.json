@@ -102,9 +102,7 @@
       "indexes": {
         "users_email_key": {
           "name": "users_email_key",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -192,17 +190,12 @@
       "indexes": {
         "accounts_userId_idx": {
           "name": "accounts_userId_idx",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         },
         "accounts_provider_providerAccountId_key": {
           "name": "accounts_provider_providerAccountId_key",
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ],
+          "columns": ["provider", "providerAccountId"],
           "isUnique": true
         }
       },
@@ -212,12 +205,8 @@
           "tableFrom": "accounts",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -323,16 +312,12 @@
       "indexes": {
         "components_creatorId_idx": {
           "name": "components_creatorId_idx",
-          "columns": [
-            "creatorId"
-          ],
+          "columns": ["creatorId"],
           "isUnique": false
         },
         "components_categoryName_idx": {
           "name": "components_categoryName_idx",
-          "columns": [
-            "categoryName"
-          ],
+          "columns": ["categoryName"],
           "isUnique": false
         }
       },
@@ -342,12 +327,8 @@
           "tableFrom": "components",
           "tableTo": "categories",
           "schemaTo": "public",
-          "columnsFrom": [
-            "categoryName"
-          ],
-          "columnsTo": [
-            "name"
-          ],
+          "columnsFrom": ["categoryName"],
+          "columnsTo": ["name"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -356,12 +337,8 @@
           "tableFrom": "components",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "creatorId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["creatorId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -408,16 +385,12 @@
       "indexes": {
         "files_componentId_idx": {
           "name": "files_componentId_idx",
-          "columns": [
-            "componentId"
-          ],
+          "columns": ["componentId"],
           "isUnique": false
         },
         "files_objectId_idx": {
           "name": "files_objectId_idx",
-          "columns": [
-            "objectId"
-          ],
+          "columns": ["objectId"],
           "isUnique": false
         }
       },
@@ -427,12 +400,8 @@
           "tableFrom": "files",
           "tableTo": "components",
           "schemaTo": "public",
-          "columnsFrom": [
-            "componentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["componentId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -473,24 +442,17 @@
       "indexes": {
         "likes_componentId_idx": {
           "name": "likes_componentId_idx",
-          "columns": [
-            "componentId"
-          ],
+          "columns": ["componentId"],
           "isUnique": false
         },
         "likes_userId_idx": {
           "name": "likes_userId_idx",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         },
         "likes_componentId_userId_key": {
           "name": "likes_componentId_userId_key",
-          "columns": [
-            "componentId",
-            "userId"
-          ],
+          "columns": ["componentId", "userId"],
           "isUnique": true
         }
       },
@@ -500,12 +462,8 @@
           "tableFrom": "likes",
           "tableTo": "components",
           "schemaTo": "public",
-          "columnsFrom": [
-            "componentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["componentId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -514,12 +472,8 @@
           "tableFrom": "likes",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -563,12 +517,8 @@
           "tableFrom": "profiles",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -603,24 +553,17 @@
       "indexes": {
         "follows_followerId_idx": {
           "name": "follows_followerId_idx",
-          "columns": [
-            "followerId"
-          ],
+          "columns": ["followerId"],
           "isUnique": false
         },
         "follows_followingId_idx": {
           "name": "follows_followingId_idx",
-          "columns": [
-            "followingId"
-          ],
+          "columns": ["followingId"],
           "isUnique": false
         },
         "follows_followerId_followingId_key": {
           "name": "follows_followerId_followingId_key",
-          "columns": [
-            "followerId",
-            "followingId"
-          ],
+          "columns": ["followerId", "followingId"],
           "isUnique": true
         }
       },
@@ -630,12 +573,8 @@
           "tableFrom": "follows",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "followerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["followerId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -644,12 +583,8 @@
           "tableFrom": "follows",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "followingId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["followingId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -657,10 +592,7 @@
       "compositePrimaryKeys": {
         "follows_pkey": {
           "name": "follows_pkey",
-          "columns": [
-            "followerId",
-            "followingId"
-          ]
+          "columns": ["followerId", "followingId"]
         }
       },
       "uniqueConstraints": {}
