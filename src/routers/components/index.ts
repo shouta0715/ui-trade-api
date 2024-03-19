@@ -6,6 +6,7 @@ import {
   transformPagination,
 } from "@/libs/schema/paginations";
 import { validate } from "@/libs/validation";
+import { getComponentCreator } from "@/services/components/creator";
 import { getPopularComponents } from "@/services/components/popular";
 import { getPreviewComponents } from "@/services/components/previews";
 import { getTrendComponents } from "@/services/components/trend";
@@ -66,6 +67,19 @@ components.get("/:id", async (c) => {
     const group = toGroupComponent(data);
 
     return c.json(group[0]);
+  } catch (error) {
+    const { message, status } = handleApiError({ error });
+
+    return c.body(message, status);
+  }
+});
+
+components.get("/:id/creator", async (c) => {
+  const id = c.req.param("id");
+  try {
+    const data = await getComponentCreator(c, id);
+
+    return c.json(data[0]);
   } catch (error) {
     const { message, status } = handleApiError({ error });
 
