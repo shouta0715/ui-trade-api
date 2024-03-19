@@ -1,13 +1,15 @@
 {
   "scripts": {
     "dev": "wrangler dev src/index.ts",
+    "lint": "prettier --write . && eslint --fix .",
     "deploy": "wrangler deploy --minify src/index.ts",
     "prepare": "husky"
   },
   "dependencies": {
     "drizzle-orm": "^0.30.2",
     "hono": "^4.1.1",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "valibot": "^0.30.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
