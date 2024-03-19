@@ -4,7 +4,7 @@ import { SelectedFields } from "drizzle-orm/pg-core";
 import { DB } from "@/drizzle/db";
 import { components } from "@/drizzle/schema";
 import { withLimit } from "@/services/helper/pagination";
-import { withLikesCount } from "@/services/likes/count/with";
+import { withLikesCounts } from "@/services/likes/count/with";
 
 type SortedComponentsProps<T extends SelectedFields> = {
   select: T;
@@ -16,7 +16,7 @@ export const withPopularComponents = <T extends SelectedFields>(
   db: DB,
   { select, limit = 20, offset = 0 }: SortedComponentsProps<T>
 ) => {
-  const likes_count = withLikesCount(db);
+  const likes_count = withLikesCounts(db);
 
   const asDynamic = db
     .select({

@@ -1,8 +1,8 @@
-import { count, sql, sum } from "drizzle-orm";
+import { count, eq, sql, sum } from "drizzle-orm";
 import { DB } from "@/drizzle/db";
 import { likes } from "@/drizzle/schema";
 
-export const withLikesCount = (db: DB) => {
+export const withLikesCounts = (db: DB) => {
   return db.$with("with_likes_count").as(
     db
       .select({
@@ -10,6 +10,19 @@ export const withLikesCount = (db: DB) => {
         componentId: likes.componentId,
       })
       .from(likes)
+      .groupBy(likes.componentId)
+  );
+};
+
+export const withLikesCount = (db: DB, componentId: string) => {
+  return db.$with("with_likes_count").as(
+    db
+      .select({
+        componentId: likes.componentId,
+        count: count().as("count"),
+      })
+      .from(likes)
+      .where(eq(likes.componentId, componentId))
       .groupBy(likes.componentId)
   );
 };

@@ -1,12 +1,13 @@
 import { Hono } from "hono";
 import { toGroupComponent } from "@/domain/components/to-group";
-import { handleApiError } from "@/libs/errors";
+import { NotFoundError, handleApiError } from "@/libs/errors";
 import {
   paginationSchema,
   transformPagination,
 } from "@/libs/schema/paginations";
 import { validate } from "@/libs/validation";
 import { getPopularComponents } from "@/services/components/popular";
+import { getPreviewComponents } from "@/services/components/previews";
 import { getTrendComponents } from "@/services/components/trend";
 import { Env } from "@/types/env";
 
@@ -47,6 +48,24 @@ components.get("/trend", async (c) => {
     });
 
     return c.json(toGroupComponent(data));
+  } catch (error) {
+    const { message, status } = handleApiError({ error });
+
+    return c.body(message, status);
+  }
+});
+
+components.get("/:id", async (c) => {
+  const id = c.req.param("id");
+
+  try {
+    const data = await getPreviewComponents(c, id);
+
+    if (data.length === 0) throw new NotFoundError();
+
+    const group = toGroupComponent(data);
+
+    return c.json(group[0]);
   } catch (error) {
     const { message, status } = handleApiError({ error });
 
