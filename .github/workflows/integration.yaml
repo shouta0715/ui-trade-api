@@ -41,5 +41,8 @@ jobs:
       - name: Setup environment variables
         run: cp .env.example.test .env.test
 
+      - name: Run migrations
+        run: bun run migrate:ci
+
       - name: Run tests
-        run: bun test
+        run: bun run test
