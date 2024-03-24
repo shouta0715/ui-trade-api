@@ -1,10 +1,10 @@
 import { desc, eq } from "drizzle-orm";
 import { runDrizzle } from "@/drizzle/db";
 import { components, files, users } from "@/drizzle/schema";
-import { withPopularComponents } from "@/services/components/popular/with";
+import { withPopularComponents } from "@/services/components/ranking/with";
 import { Context } from "@/types/env";
 
-export const getPopularComponents = async (
+export const getRankingComponents = async (
   c: Context,
   limit = 20,
   offset = 0

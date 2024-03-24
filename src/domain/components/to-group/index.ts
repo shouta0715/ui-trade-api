@@ -49,3 +49,71 @@ export const toGroupComponent = <T>(
 
   return Object.values(grouped);
 };
+
+type WithFilesInput<T> = {
+  id: string;
+  userId: string | null;
+  username: string | null;
+  image: string | null;
+  extension: Extension;
+  filename: string;
+  fileId: number;
+} & T;
+
+type GroupedComponentWithFiles<T> = {
+  id: string;
+  creator: {
+    id: string | null;
+    name: string | null;
+    image: string | null;
+  };
+  files: {
+    extension: Extension;
+    filename: string;
+    fileId: number;
+  }[];
+} & Omit<
+  T,
+  "userId" | "username" | "image" | "extension" | "filename" | "fileId" | "id"
+>;
+
+export const toGroupComponentWithFiles = <T>(
+  input: WithFilesInput<T>[]
+): GroupedComponentWithFiles<T>[] => {
+  const grouped = input.reduce(
+    (acc, cur) => {
+      const {
+        id,
+        userId,
+        username,
+        image,
+        extension,
+        filename,
+        fileId,
+        ...rest
+      } = cur;
+      const find = acc[id];
+
+      if (find) {
+        find.files.push({ extension, filename, fileId });
+
+        return acc;
+      }
+      acc[id] = {
+        id,
+        creator: {
+          id: userId,
+          name: username,
+          image,
+        },
+        files: [{ extension, filename, fileId }],
+        ...rest,
+      };
+
+      return acc;
+    },
+    {} as Record<string, GroupedComponentWithFiles<T>>
+  );
+
+  return Object.values(grouped);
+};

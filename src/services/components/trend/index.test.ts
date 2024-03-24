@@ -7,9 +7,12 @@ describe("API RDB Test Trend", () => {
   describe("getTrendComponents", async () => {
     type Res = Awaited<ReturnType<typeof getTrendComponents>>;
     test("draft = true not get", async () => {
-      await createMockTrendComponent({ draft: true });
+      const { category } = await createMockTrendComponent({ draft: true });
+      const url = `/components/trend?category=${encodeURIComponent(
+        category.name
+      )}`;
 
-      const res = await app.request("/components/trend", {}, MOCK_ENV);
+      const res = await app.request(url.toString(), {}, MOCK_ENV);
 
       expect(res.status).toBe(200);
 
@@ -24,11 +27,11 @@ describe("API RDB Test Trend", () => {
         length: 10,
       });
 
-      const res = await app.request(
-        `/components/trend?category=${category.name}`,
-        {},
-        MOCK_ENV
-      );
+      const url = `/components/trend?category=${encodeURIComponent(
+        category.name
+      )}`;
+
+      const res = await app.request(url.toString(), {}, MOCK_ENV);
 
       expect(res.status).toBe(200);
       const components = (await res.json()) as Res;

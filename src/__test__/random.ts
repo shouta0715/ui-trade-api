@@ -1,5 +1,12 @@
 import { getTestDB } from "@/__test__";
-import { categories, components, files, likes, users } from "@/drizzle/schema";
+import {
+  categories,
+  components,
+  files,
+  likes,
+  profiles,
+  users,
+} from "@/drizzle/schema";
 import { randomBool, randomExtension, randomString } from "@/utils/random";
 
 export const testRandomUser = async () => {
@@ -30,6 +37,26 @@ export const testRandomCategory = async (
     .values({
       name,
       description,
+      ...value,
+    })
+    .onConflictDoNothing()
+    .returning();
+
+  return values[0];
+};
+
+export const testRandomProfile = async (
+  userId: string,
+  value?: typeof profiles.$inferInsert
+) => {
+  const db = await getTestDB();
+  const values = await db
+    .insert(profiles)
+    .values({
+      userId,
+      website: randomString(),
+      github: randomString(),
+      twitter: randomString(),
       ...value,
     })
     .onConflictDoNothing()

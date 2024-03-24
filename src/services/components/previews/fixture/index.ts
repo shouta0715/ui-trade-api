@@ -6,7 +6,7 @@ import {
   testRandomUser,
 } from "@/__test__/random";
 
-export const createMockTrendComponent = async ({
+export const createMockComponent = async ({
   draft = false,
   length = 10,
 }: {
@@ -25,7 +25,6 @@ export const createMockTrendComponent = async ({
       return testRandomFile(component.id);
     })
   );
-
   const likes = await Promise.all(
     components.map(async (component) => {
       return testRandomLike(component.creatorId, component.id);

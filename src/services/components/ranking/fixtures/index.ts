@@ -6,7 +6,7 @@ import {
   testRandomUser,
 } from "@/__test__/random";
 
-export const createMockTrendComponent = async ({
+export const createMockPopularComponent = async ({
   draft = false,
   length = 10,
 }: {

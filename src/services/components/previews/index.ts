@@ -46,6 +46,6 @@ export const getPreviewComponents = async (c: Context, id: string) => {
       .where(and(eq(components.id, id), eq(components.draft, false)))
       .innerJoin(users, eq(components.creatorId, users.id))
       .innerJoin(files, eq(components.id, files.componentId))
-      .innerJoin(profiles, eq(users.id, profiles.userId));
+      .leftJoin(profiles, eq(users.id, profiles.userId));
   });
 };
