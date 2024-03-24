@@ -1,5 +1,8 @@
 import { Hono } from "hono";
-import { toGroupComponent } from "@/domain/components/to-group";
+import {
+  toGroupComponent,
+  toGroupComponentWithFiles,
+} from "@/domain/components/to-group";
 import { NotFoundError, handleApiError } from "@/libs/errors";
 import {
   paginationSchema,
@@ -64,7 +67,7 @@ components.get("/:id", async (c) => {
 
     if (data.length === 0) throw new NotFoundError();
 
-    const group = toGroupComponent(data);
+    const group = toGroupComponentWithFiles(data);
 
     return c.json(group[0]);
   } catch (error) {

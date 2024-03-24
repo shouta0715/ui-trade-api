@@ -8,7 +8,7 @@ export const getTestDB = async () => {
 
   await client.connect();
 
-  return drizzle(client, { schema, logger: true });
+  return drizzle(client, { schema });
 };
 
 export const MOCK_ENV = {
