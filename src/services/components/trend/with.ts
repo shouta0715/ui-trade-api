@@ -1,4 +1,4 @@
-import { desc, eq, sql } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import { SelectedFields } from "drizzle-orm/pg-core";
 import { DB } from "@/drizzle/db";
 import { components } from "@/drizzle/schema";
@@ -18,7 +18,9 @@ export const withTrendComponents = <T extends SelectedFields>(
 ) => {
   const with_like_weight = withLikeWeight(db);
 
-  const where = category ? eq(components.categoryName, category) : undefined;
+  const where = category
+    ? and(eq(components.categoryName, category), eq(components.draft, false))
+    : eq(components.draft, false);
 
   const asDynamic = db
     .select({
