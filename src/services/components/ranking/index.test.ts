@@ -1,12 +1,14 @@
 import { MOCK_ENV } from "@/__test__";
 import app from "@/index";
 import { getRankingComponents } from "@/services/components/ranking";
+import { createMockPopularComponent } from "@/services/components/ranking/fixtures";
 
 describe("API RDB Test Trend", () => {
   describe("getTrendComponents", async () => {
     type Res = Awaited<ReturnType<typeof getRankingComponents>>;
 
     test("rankings ", async () => {
+      await createMockPopularComponent({ draft: false, length: 10 });
       const url = `/components/rankings?limit=10&offset=0`;
 
       const res = await app.request(url.toString(), {}, MOCK_ENV);
