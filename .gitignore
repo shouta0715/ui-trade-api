@@ -5,6 +5,9 @@ dist
 .env
 .env.*
 !*.env.example
+!*.env.example.*
+
+
 
 # Change them to your taste:
 package-lock.json

@@ -3,6 +3,7 @@
     "dev": "wrangler dev src/index.ts",
     "lint": "prettier --write . && eslint --fix .",
     "deploy": "wrangler deploy --minify src/index.ts",
+    "migrate:ci": "dotenv -e .env.test bun tsx src/drizzle/migrate.ts",
     "test": "dotenv -e .env.test bun vitest -c ./vitest.config.ts",
     "prepare": "husky"
   },
@@ -10,6 +11,7 @@
     "drizzle-orm": "^0.30.2",
     "hono": "^4.1.1",
     "pg": "^8.11.3",
+    "tsx": "^4.7.1",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
