@@ -3,12 +3,15 @@
     "dev": "wrangler dev src/index.ts",
     "lint": "prettier --write . && eslint --fix .",
     "deploy": "wrangler deploy --minify src/index.ts",
+    "migrate:ci": "dotenv -e .env.test bun tsx src/drizzle/migrate.ts",
+    "test": "dotenv -e .env.test bun vitest -c ./vitest.config.ts",
     "prepare": "husky"
   },
   "dependencies": {
     "drizzle-orm": "^0.30.2",
     "hono": "^4.1.1",
     "pg": "^8.11.3",
+    "tsx": "^4.7.1",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
@@ -16,6 +19,7 @@
     "@types/pg": "^8.11.2",
     "@typescript-eslint/eslint-plugin": "latest",
     "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.1",
     "drizzle-kit": "^0.20.14",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
@@ -26,6 +30,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
+    "vitest": "^1.4.0",
     "wrangler": "^3.32.0"
   },
   "lint-staged": {

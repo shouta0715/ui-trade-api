@@ -1,0 +1,48 @@
+name: Run unit Tests
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "test/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".env.example.test"
+      - "supabase/**"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: SetUp Supabase
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Run Supabase Database
+        run: supabase db start
+
+      - name: Run Supabase Lint
+        run: supabase db lint
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Setup environment variables
+        run: cp .env.example.test .env.test
+
+      - name: Run migrations
+        run: bun run migrate:ci
+
+      - name: Run tests
+        run: bun run test
