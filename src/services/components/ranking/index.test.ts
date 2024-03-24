@@ -6,7 +6,7 @@ describe("API RDB Test Trend", () => {
   describe("getTrendComponents", async () => {
     type Res = Awaited<ReturnType<typeof getRankingComponents>>;
 
-    test("draft = false get trend", async () => {
+    test("rankings ", async () => {
       const url = `/components/rankings?limit=10&offset=0`;
 
       const res = await app.request(url.toString(), {}, MOCK_ENV);
