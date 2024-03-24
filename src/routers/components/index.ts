@@ -10,14 +10,14 @@ import {
 } from "@/libs/schema/paginations";
 import { validate } from "@/libs/validation";
 import { getComponentCreator } from "@/services/components/creator";
-import { getPopularComponents } from "@/services/components/popular";
 import { getPreviewComponents } from "@/services/components/previews";
+import { getRankingComponents } from "@/services/components/ranking";
 import { getTrendComponents } from "@/services/components/trend";
 import { Env } from "@/types/env";
 
 const components = new Hono<Env>();
 
-components.get("/popular", async (c) => {
+components.get("/rankings", async (c) => {
   const l = c.req.query("limit");
   const o = c.req.query("offset");
 
@@ -25,7 +25,7 @@ components.get("/popular", async (c) => {
     const { limit, offset } = transformPagination(l, o);
     validate({ limit, offset }, paginationSchema);
 
-    const data = await getPopularComponents(c, limit, offset);
+    const data = await getRankingComponents(c, limit, offset);
 
     return c.json(toGroupComponent(data));
   } catch (error) {
