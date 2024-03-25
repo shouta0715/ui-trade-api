@@ -1,4 +1,11 @@
-import { number, object, optional, toMaxValue, toMinValue } from "valibot";
+import {
+  number,
+  object,
+  optional,
+  string,
+  toMaxValue,
+  toMinValue,
+} from "valibot";
 
 export const paginationSchema = object({
   limit: optional(number([toMaxValue(50), toMinValue(1)])),
@@ -11,3 +18,9 @@ export const transformPagination = (limit?: string, offset?: string) => {
     offset: offset ? Number(offset) : 0,
   };
 };
+
+export const paginationWithSearchSchema = object({
+  limit: optional(number([toMaxValue(50), toMinValue(1)])),
+  offset: optional(number([toMinValue(0)])),
+  q: optional(string()),
+});

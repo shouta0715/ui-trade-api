@@ -1,14 +1,18 @@
+/* eslint-disable no-nested-ternary */
 type GroupedCategory = {
   name: string;
   description: string | null;
   count: number;
   componentId: string;
   previewUrl: string;
-  creator: {
-    id: string | null;
-    name: string | null;
-    image: string | null;
-  } | null;
+  creator:
+    | {
+        id?: string | null;
+        name?: string | null;
+        image?: string | null;
+      }
+    | null
+    | undefined;
 };
 
 type Input = {
@@ -21,9 +25,9 @@ type Input = {
     categoryName: string;
     previewUrl: string;
     id: string;
-    image: string | null;
-    creatorId: string | null;
-    creatorName: string | null;
+    image?: string | null;
+    creatorId?: string | null;
+    creatorName?: string | null;
   }[];
 };
 
@@ -40,6 +44,14 @@ export const toGroupCategories = (input: Input): GroupedCategory => {
     count: category.count,
     componentId: first.id,
     previewUrl: first.previewUrl,
-    creator: creatorId ? { id: creatorId, name: creatorName, image } : null,
+    creator: creatorId
+      ? {
+          id: creatorId,
+          name: creatorName,
+          image,
+        }
+      : creatorId === null
+        ? null
+        : undefined,
   };
 };

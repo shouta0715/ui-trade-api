@@ -8,21 +8,21 @@ type GroupedPopularCategory = {
   };
 };
 
-type Input = {
+type Input<T> = {
   categories: {
     name: string;
     description: string | null;
     count: number;
   }[];
-  components: {
+  components: ({
     categoryName: string;
     previewUrl: string;
     id: string;
-  }[];
+  } & T)[];
 };
 
-export const toGroupPopularCategories = (
-  input: Input
+export const toGroupPopularCategories = <T>(
+  input: Input<T>
 ): GroupedPopularCategory[] => {
   const grouped = input.categories.reduce(
     (acc, cur) => {
